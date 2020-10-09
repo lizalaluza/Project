@@ -147,6 +147,8 @@ int main()
     while (true)
     {
         txBegin();
+        
+        txClear();
 
         for (int i = 0; i < numberofspheres; i++)
         {
@@ -154,8 +156,6 @@ int main()
         }
 
         txEnd();
-
-        txClear();
 
         for (int i = 0; i < numberofspheres; i++)
         {
