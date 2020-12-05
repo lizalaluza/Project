@@ -184,7 +184,7 @@ int main()
         t.loadFromFile("33.jpg");
         sf::Sprite s;
         s.setTexture(t);
-        s.setPosition(80, 180);
+        s.setPosition(0, 0);
 
         while (window1.isOpen())
         {
