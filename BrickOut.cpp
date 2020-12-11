@@ -11,10 +11,10 @@ int main()
     float windowx = 1300;
     float windowy = 800;
     float radius = 10;
-    float vx = 50;
+    float vx = 60;
     float vy = -50;
-    float sticklx = 180;
-    float stickly = 10; 
+    float sticklx = 160;
+    float stickly = 7; 
     float stickx = windowx / 2 - sticklx / 2;
     float sticky = windowy - (50 + stickly); 
 
@@ -70,7 +70,7 @@ int main()
     shape.setFillColor(sf::Color::Green);
     shape.setPosition({ x, y });
 
-    sf::RectangleShape rectangle(sf::Vector2f(180.f, 10.f));
+    sf::RectangleShape rectangle(sf::Vector2f(160.f, 7.f));
     rectangle.setPosition({ stickx, sticky });
     rectangle.setFillColor(sf::Color::Blue); 
 
