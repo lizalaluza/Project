@@ -38,6 +38,7 @@ int main()
 
 	int end = 0;
     int k = 0;
+    char enough_text = 0;
 
 	while (window.isOpen())
 	{
@@ -63,22 +64,27 @@ int main()
 				view.move(0, -20 * event.mouseWheelScroll.delta);
 			}
 
-            if (event.type == sf::Event::TextEntered)
-			{
-				k += 1;
-                if (k > 120 and k < 350)
-                {
-                    view.move(0, 5);
-                }
-                else if (k > 350 and k < 630)
-                {
-                    view.move(0, 3);
-                }
-			}
-
 			if (event.type == sf::Event::KeyPressed)
 			{
 				text += String(buffer.str[end] + buffer.str[end + 1]);
+
+                if (enough_text == 1)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if ( buffer.str[end + i] == '\n' && end < (p - 5))
+                        {
+                            view.move(0, 30); 
+                        }
+                    }
+                }
+                else
+                {
+                    sf::Vector2f pos = program.findCharacterPos((size_t)end);
+                    if (pos.y > window_width / 1.2)
+                        enough_text = 1;    	
+                }
+
 				end += 4;
 				if (end > p - 5)
 					end -= 4;
