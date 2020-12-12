@@ -37,7 +37,6 @@ int main()
 	program.setCharacterSize(25);
 
 	int end = 0;
-    int k = 0;
     char enough_text = 0;
 
 	while (window.isOpen())
