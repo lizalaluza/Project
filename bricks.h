@@ -2,6 +2,14 @@
 
 const float DT = 0.01;
 
+
+struct Brick
+    {
+    float x;
+    float y;
+    bool exist;
+    };
+
 void circleMove(float* x, float vx, float* y, float vy)
 {
     *x += vx * DT;
@@ -53,49 +61,31 @@ void collisionTablet(float stickx, float sticky, float sticklx, float x, float y
 
 }
 
-void brickCollision(float x, float y, float *vx, float *vy, float radius, const float DT, int array[])
+void brickCollision(float x, float y, float *vx, float *vy, float radius, const float DT, Brick* brick1)
 {
-    int k = 0;
-    int j = 0;
-    int m = 0;
-    for (int i = 0; i < 40; i++)
-    {
-        m = k % 2;
-        if (array[i] != 0)
+    
+        if (brick1->exist)
         {
-            if ((250 - 40 * m + 83 * j <= x + radius) and (250 - 40 * m + 83 * j + 80 >= x + radius) and ( 100 + 35 * k <= y + 2 * radius) and ( 100 + 35 * k + *vy * DT >= y + 2 * radius))
+            if ((brick1->x <= x + radius) and (brick1->x + 80 >= x + radius) and (brick1->y <= y + 2 * radius) and ( brick1->y + *vy * DT >= y + 2 * radius))
                 {
                     *vy = - *vy;
-                    array[i] = {0};
-                    break;
+                    brick1->exist = false ;
                 }
-            if ((250 - 40 * m + 83 * j <= x + radius) and (250 - 40 * m + 83 * j + 80 >= x + radius) and ( 100 + 35 * k + 30 >= y) and ( 100 + 35 * k + 30 + *vy * DT <= y ))
+            else if ((brick1->x <= x + radius) and (brick1->x + 80 >= x + radius) and ( brick1->y >= y) and ( brick1->y + *vy * DT <= y ))
                 {
                     *vy = - *vy;
-                    array[i] = {0};
-                    break;
+                    brick1->exist = false ;
                 }
-            if ((250 - 40 * m + 83 * j <= x + 2 * radius) and (250 - 40 * m + 83 * j + *vx * DT >= x + 2 * radius) and ( 100 + 35 * k <= y + radius) and ( 100 + 35 * k + 30 >= y + radius))
-            {
-                *vx = - *vx;
-                array[i] = {0};
-                break;
-            }
-            if ((250 - 40 * m + 83 * j + *vx * DT <= x ) and (250 - 40 * m + 83 * j + 80 >= x ) and ( 100 + 35 * k <= y + radius) and ( 100 + 35 * k + 30 >= y + radius))
-            {
-                *vx = - *vx;
-                array[i] = {0};
-                break;
-            }
-            
+            else if ((brick1->x <= x + 2 * radius) and (brick1->x + *vx * DT >= x + 2 * radius) and ( brick1->y <= y + radius) and ( brick1->y + 30 >= y + radius))
+                {
+                    *vx = - *vx;
+                    brick1->exist = false ;
+                }
+            else if ((brick1->x + *vx * DT <= x ) and (brick1->x + 80 >= x ) and ( brick1->y <= y + radius) and ( brick1->y + 30 >= y + radius))
+                {
+                    *vx = - *vx;
+                    brick1->exist = false ;
+                }    
         }
-
-        j += 1;
-        if (j >= 10)
-        {
-            j = 0;
-            k += 1;
-        }
-
-    }
+    
 }
